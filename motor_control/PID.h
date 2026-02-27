@@ -3,10 +3,8 @@
 
 class PID {
   public:
-    // Constructor
     PID(double kp, double ki, double kd, double max_error);
     
-    // Calculate method now takes delta time (dt) in seconds
     double Calculate(double setpoint, double input, double dt);
 
   private:
