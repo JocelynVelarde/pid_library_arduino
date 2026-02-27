@@ -14,16 +14,17 @@ volatile int countPhaseA = 0;
 double setPointRPM = 0; 
 double currentRPM = 0; 
 int pwmValue = 0;      
-const double MAX_RPM = 500; 
+const double MAX_RPM = 463; 
+const int two_hundred = 200;
 
 unsigned long previousMillis = 0;
-const unsigned long sampleTime = 50; 
+const unsigned long sampleTime = 15; 
 
 // PID Tuning Parameters
-double Kp = 20.0; 
-double Ki = 0.0; 
-double Kd = 0.1; 
-double max_error = 400; 
+double Kp = 1.5; 
+double Ki = 60.0; 
+double Kd = 0.0; 
+double max_error = 1000; 
 
 PID myPID(Kp, Ki, Kd, max_error);
 
@@ -68,7 +69,7 @@ void loop() {
     previousMillis = currentMillis; 
     interrupts();
     
-    currentRPM = (pulseCount * 160) / (60*(10) * dt);
+    currentRPM = (pulseCount * 60) / (102 * dt);
     
     double pidResult = myPID.Calculate(abs(setPointRPM), abs(currentRPM), dt);
     pwmValue = (int)pidResult;
@@ -98,7 +99,9 @@ void loop() {
     Serial.print("Target_%:"); Serial.print(setpointRpmPercent);
     Serial.print(",");
     Serial.print("Real_%:"); Serial.println(currentRpmPercent);
-    
+    Serial.println();
+    Serial.print("twohundred%:"); Serial.println(200);
+    Serial.print("minustwo%:"); Serial.println(-200);
     // Toggle diagnostic LED
     digitalWrite(LED_GPIO, !digitalRead(LED_GPIO));
   }

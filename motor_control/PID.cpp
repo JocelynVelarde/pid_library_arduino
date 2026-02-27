@@ -1,4 +1,5 @@
 #include "PID.h"
+#include "Arduino.h"
 
 // Constructor implementation
 PID::PID(double kp, double ki, double kd, double max_error)
@@ -34,7 +35,7 @@ double PID::Calculate(double setpoint, double input, double dt)
     
     // Total Output
     double output = proportional + integral + derivative;
-    
+  
     // Save state for the next cycle
     last_error_ = error;
     last_output_ = output; 
