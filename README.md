@@ -48,3 +48,35 @@ The Python dashboard reads the JSON telemetry payload from the serial port.
 **Telemetry JSON Format:**
 ```json
 {"target": 85.5, "real": 84.2, "pwm": 450, "stop": 0}
+```
+
+# Installation & Usage
+
+## Setting up the ESP32
+
+1. Open `motor_control.ino` in the Arduino IDE.  
+2. Ensure `PID.h` and `PID.cpp` are located in the same directory as your `.ino` sketch.  
+3. Select your ESP32 board and the correct COM port.  
+4. Compile and upload the code.
+
+---
+
+## Setting up the Dashboard
+
+1. Ensure you have Python installed (3.8+ recommended).  
+2. Install the required dependencies:
+
+```bash
+pip install streamlit pyserial pandas
+```
+
+3. Update the `SERIAL_PORT` variable in `dashboard.py` to match your ESP32's COM port:
+
+- Windows: 'COM10' (example)
+
+- Linux/Mac: '/dev/ttyUSB0'
+
+Run the Streamlit app:
+```
+streamlit run dashboard.py
+```
