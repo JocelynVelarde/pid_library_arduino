@@ -10,12 +10,9 @@ double PID::Calculate(double setpoint, double input, double dt)
     if (dt <= 0.0) {
         return last_output_; 
     }
-
     double error = setpoint - input;
-    double proportional = kp_ * error;
-    
+    double proportional = kp_ * error;  
     integral_sum_ += (error * dt);
-    
     if (integral_sum_ > max_error_) {
         integral_sum_ = max_error_;
     } else if (integral_sum_ < -max_error_) {
@@ -24,7 +21,6 @@ double PID::Calculate(double setpoint, double input, double dt)
     
     double integral = ki_ * integral_sum_;
     double derivative = kd_ * (error - last_error_) / dt;
-    
     double output = proportional + integral + derivative;
     last_error_ = error;
     last_output_ = output; 

@@ -67,7 +67,7 @@ void loop() {
     previousMillis = currentMillis; 
     interrupts();
     
-    currentRPM = (pulseCount * 60.0) / (102.0 * dt);
+    currentRPM = (pulseCount * 60.0) / (115 * dt);
 
     if (isStopPressed) {
       pwmValue = 0;
